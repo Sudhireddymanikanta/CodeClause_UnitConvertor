@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Weight Converter</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="converter">
+    <h1>Weight Converter</h1>
+    <div class="input-group">
+      <label>Enter weight:</label>
+      <input type="number" id="weight-input">
+      <label>From</label>
+      <select id="from-unit">
+        <option value="kg">kilograms</option>
+        <option value="g">grams</option>
+        <option value="mg">milligrams</option>
+        <option value="lb">pounds</option>
+      </select>
+    </div>
+    <div class="input-group">
+      <label>To</label>
+      <select id="to-unit">
+        <option value="kg">kilograms</option>
+        <option value="g">grams</option>
+        <option value="mg">milligrams</option>
+        <option value="lb">pounds</option>
+      </select>
+    </div>
+    <button onclick="convert()">Convert</button>
+    <div id="output"></div>
+  </div>
+    <script>
+        function convert() {
+  const weightInput = document.getElementById("weight-input");
+  const fromUnitSelect = document.getElementById("from-unit");
+  const toUnitSelect = document.getElementById("to-unit");
+  const outputDiv = document.getElementById("output");
+  
+  // Get the selected options from the select elements
+  const fromUnit = fromUnitSelect.value;
+  const toUnit = toUnitSelect.value;
+  
+  // Get the weight value from the input element
+  const weight = parseFloat(weightInput.value);
+  
+  // Define variables for the conversion factors and result unit
+  let conversionFactor = 1;
+  let resultUnit = "";
+  
+  // Check the fromUnit and toUnit and set the conversion factor and result unit accordingly
+  if (fromUnit === "kg" && toUnit === "lb") {
+    conversionFactor = 2.20462;
+    resultUnit = "pounds";
+  } else if (fromUnit === "lb" && toUnit === "kg") {
+    conversionFactor = 0.453592;
+    resultUnit = "kilograms";
+  } else if (fromUnit === "kg" && toUnit === "g") {
+    conversionFactor = 1000;
+    resultUnit = "grams";
+  } else if (fromUnit === "g" && toUnit === "kg") {
+    conversionFactor = 0.001;
+    resultUnit = "kilograms";
+  } else if (fromUnit === "g" && toUnit === "lb") {
+    conversionFactor = 0.00220462;
+    resultUnit = "pounds";
+  } else if (fromUnit === "lb" && toUnit === "g") {
+    conversionFactor = 453.592;
+    resultUnit = "grams";
+  } else if (fromUnit === "kg" && toUnit === "mg") {
+    conversionFactor = 1000000;
+    resultUnit = "milligrams";
+  } else if (fromUnit === "mg" && toUnit === "kg") {
+    conversionFactor = 0.000001;
+    resultUnit = "kilograms";
+  } else if (fromUnit === "g" && toUnit === "mg") {
+    conversionFactor = 1000;
+    resultUnit = "milligrams";
+  } else if (fromUnit === "mg" && toUnit === "g") {
+    conversionFactor = 0.001;
+    resultUnit = "grams";
+  } else if (fromUnit === toUnit) {
+    resultUnit = fromUnit;
+  }
+  
+  // Calculate the converted weight
+  const result = weight * conversionFactor;
+  
+  // Display the result on the page
+  outputDiv.innerHTML = `${weight} ${fromUnit} is equal to ${result.toFixed(2)} ${resultUnit}.`;
+}
+
+
+    </script>
+  </body>
+</html>

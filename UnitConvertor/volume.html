@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Volume Converter</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+    <div class="converter">
+	<h1>Volume Converter</h1>
+	<div>
+		<label>Enter the volume:</label>
+		<input type="number" id="volumeInput">
+        <label>From</label>
+		<select id="fromUnit">
+			<option value="cubicMeter">Cubic Meter</option>
+			<option value="cubicCentimeter">Cubic Centimeter</option>
+			<option value="cubicMillimeter">Cubic Millimeter</option>
+			<option value="cubicKilometer">Cubic Kilometer</option>
+			<option value="liter">Liter</option>
+			<option value="milliliter">Milliliter</option>
+		</select>
+		<label>To</label>
+		<select id="toUnit">
+			<option value="cubicMeter">Cubic Meter</option>
+			<option value="cubicCentimeter">Cubic Centimeter</option>
+			<option value="cubicMillimeter">Cubic Millimeter</option>
+			<option value="cubicKilometer">Cubic Kilometer</option>
+			<option value="liter">Liter</option>
+			<option value="milliliter">Milliliter</option>
+		</select>
+		<button onclick="convert()">Convert</button>
+	</div>
+	<div>
+		<p id="result"></p>
+	</div>
+</div>
+	<script>
+        function convert() {
+  // Get the input value and selected units
+  let volume = document.getElementById("volumeInput").value;
+  let fromUnit = document.getElementById("fromUnit").value;
+  let toUnit = document.getElementById("toUnit").value;
+
+  // Convert the input volume to cubic meters
+  let cubicMeter;
+  switch (fromUnit) {
+    case "cubicMeter":
+      cubicMeter = volume;
+      break;
+    case "cubicCentimeter":
+      cubicMeter = volume / 1000000;
+      break;
+    case "cubicMillimeter":
+      cubicMeter = volume / 1000000000;
+      break;
+    case "cubicKilometer":
+      cubicMeter = volume * 1000000000;
+      break;
+    case "liter":
+      cubicMeter = volume / 1000;
+      break;
+    case "milliliter":
+      cubicMeter = volume / 1000000;
+      break;
+  }
+
+  // Convert the cubic meters to the selected unit
+  let result;
+  switch (toUnit) {
+    case "cubicMeter":
+      result = cubicMeter;
+      break;
+    case "cubicCentimeter":
+      result = cubicMeter * 1000000;
+      break;
+    case "cubicMillimeter":
+      result = cubicMeter * 1000000000;
+      break;
+    case "cubicKilometer":
+      result = cubicMeter / 1000000000;
+      break;
+    case "liter":
+      result = cubicMeter * 1000;
+      break;
+    case "milliliter":
+      result = cubicMeter * 1000000;
+      break;
+  }
+
+  // Display the result
+  document.getElementById("result").innerHTML = volume + " " + fromUnit + " = " + result.toFixed(4) + " " + toUnit;
+}
+
+    </script>
+</body>
+</html>

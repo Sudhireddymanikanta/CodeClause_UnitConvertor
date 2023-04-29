@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Temperature Converter</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="converter">
+    <h1>Temperature Converter</h1>
+    <label for="input">Input</label>
+    <input type="number" id="input" placeholder="Enter value...">
+    <label for="from">From</label>
+    <select id="from">
+      <option value="celsius">Celsius</option>
+      <option value="kelvin">Kelvin</option>
+      <option value="fahrenheit">Fahrenheit</option>
+    </select>
+    <label for="to">To</label>
+    <select id="to">
+      <option value="celsius">Celsius</option>
+      <option value="kelvin">Kelvin</option>
+      <option value="fahrenheit">Fahrenheit</option>
+    </select>
+    <button onclick="convert()">Convert</button>
+    <div id="output"></div>
+  </div>
+  <script>
+	function convert() {
+  // Get input value and selected units
+  const inputValue = parseFloat(document.getElementById('input').value);
+  const fromUnit = document.getElementById('from').value;
+  const toUnit = document.getElementById('to').value;
+
+  // Calculate conversion
+  let outputValue;
+  if (fromUnit === 'celsius') {
+    if (toUnit === 'kelvin') {
+      outputValue = inputValue + 273.15;
+    } else if (toUnit === 'fahrenheit') {
+      outputValue = (inputValue * 9 / 5) + 32;
+    } else {
+      outputValue = inputValue;
+    }
+  } else if (fromUnit === 'kelvin') {
+    if (toUnit === 'celsius') {
+      outputValue = inputValue - 273.15;
+    } else if (toUnit === 'fahrenheit') {
+      outputValue = (inputValue - 273.15) * 9 / 5 + 32;
+    } else {
+      outputValue = inputValue;
+    }
+  } else if (fromUnit === 'fahrenheit') {
+    if (toUnit === 'celsius') {
+      outputValue = (inputValue - 32) * 5 / 9;
+    } else if (toUnit === 'kelvin') {
+      outputValue = (inputValue - 32) * 5 / 9 + 273.15;
+    } else {
+      outputValue = inputValue;
+    }
+  }
+
+  // Display result
+  const outputElement = document.getElementById('output');
+  outputElement.innerText = `${inputValue} ${fromUnit} = ${outputValue.toFixed(2)} ${toUnit}`;
+}
+
+  </script>
+</body>
+</html>

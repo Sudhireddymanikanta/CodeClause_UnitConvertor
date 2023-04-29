@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Area Converter</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="converter">
+    <h1>Area Converter</h1>
+    <label for="input">Input</label>
+    <input type="number" id="input" placeholder="Enter value...">
+    <label for="from">From</label>
+    <select id="from">
+      <option value="m2">Square Meter</option>
+      <option value="km2">Square Kilometer</option>
+      <option value="cm2">Square Centimeter</option>
+      <option value="mm2">Square Millimeter</option>
+      <option value="ha">Hectare</option>
+      <option value="ac">Acre</option>
+    </select>
+    <label for="to">To</label>
+    <select id="to">
+      <option value="m2">Square Meter</option>
+      <option value="km2">Square Kilometer</option>
+      <option value="cm2">Square Centimeter</option>
+      <option value="mm2">Square Millimeter</option>
+      <option value="ha">Hectare</option>
+      <option value="ac">Acre</option>
+    </select>
+    <button onclick="convert()">Convert</button>
+    <div id="output"></div>
+  </div>
+  <script>
+    function convert() {
+  // Get user input
+  const input = document.getElementById('input').value;
+  const from = document.getElementById('from').value;
+  const to = document.getElementById('to').value;
+
+  // Define conversion rates
+  const conversionRates = {
+    m2: {
+      km2: 0.000001,
+      cm2: 10000,
+      mm2: 1000000,
+      ha: 0.0001,
+      ac: 0.000247105
+    },
+    km2: {
+      m2: 1000000,
+      cm2: 1e+14,
+      mm2: 1e+12,
+      ha: 100,
+      ac: 247.105
+    },
+    cm2: {
+      m2: 0.0001,
+      km2: 1e-14,
+      mm2: 100,
+      ha: 1e-8,
+      ac: 2.47105e-8
+    },
+    mm2: {
+      m2: 0.000001,
+      km2: 1e-12,
+      cm2: 0.01,
+      ha: 1e-10,
+      ac: 2.47105e-10
+    },
+    ha: {
+      m2: 10000,
+      km2: 0.01,
+      cm2: 1e+8,
+      mm2: 1e+10,
+      ac: 2.47105
+    },
+    ac: {
+      m2: 4046.86,
+      km2: 0.00404686,
+      cm2: 4.04686e+7,
+      mm2: 4.04686e+9,
+      ha: 0.404686
+    }
+  };
+
+  // Convert area
+  const result = input * conversionRates[from][to];
+
+  // Display result
+  document.getElementById('output').innerHTML = `${input} ${from} = ${result.toFixed(6)} ${to}`;
+}
+
+  </script>
+</body>
+</html>
